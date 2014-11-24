@@ -13,5 +13,13 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('layout.main');
+});
+
+
+Route::resource('users', 'UsersController');
+
+/*About*/
+Route::get('about', function(){
+    return View::make('about');
 });
