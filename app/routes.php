@@ -11,15 +11,16 @@
 |
 */
 
+/*home*/
 Route::get('/', function()
 {
-	return View::make('layout.main');
+	return View::make('home');
 });
 
 
 Route::resource('users', 'UsersController');
 
 /*About*/
-Route::get('about', function(){
-    return View::make('about');
+Route::get('sobre', function(){
+    return View::make('sobre');
 });
