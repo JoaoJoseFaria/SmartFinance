@@ -1,0 +1,20 @@
+<?php $__env->startSection('content'); ?>
+<div class="about">
+    <h1>Trabalho de Engenharia de Software</h1>
+    <p>Neste trabalho vamos implementar um sistema que permita ajudar a gerir as despesas financeiras pessoais.</p>
+    <p>Para implementar o sistema vamos utilizar a framework Laravel 4</p>
+    <p>Trabalho realizado por:
+        <ul>
+            <li>
+                a8836<br/>
+                José Filipe Caldas
+            </li>
+            <li>
+                a8836<br/>
+                João José Neves Faria
+            </li>
+        </ul>
+    </p>
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

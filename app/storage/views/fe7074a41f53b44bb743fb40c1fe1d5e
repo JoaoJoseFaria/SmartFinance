@@ -1,0 +1,10 @@
+<?php $__env->startSection("content"); ?>
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="text-center">SmartFinance</h1>
+        <h2 class="text-center">Gestão de Finanças Pessoais</h2>
+        <img src="img/Personal-Finance-Tips.jpg" alt="SmartFinance" class="img-responsive center-block">
+    </div>
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make("layout.main", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
