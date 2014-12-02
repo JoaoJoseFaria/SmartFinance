@@ -17,6 +17,7 @@ Route::get('/', function()
 	return View::make('home');
 });
 
+/*login*/
 
 Route::resource('users', 'UsersController');
 
@@ -24,3 +25,6 @@ Route::resource('users', 'UsersController');
 Route::get('sobre', function(){
     return View::make('sobre');
 });
+
+/*Categorias*/
+Route::resource('categorias', 'CategoriasController');

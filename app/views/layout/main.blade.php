@@ -26,7 +26,7 @@
                         <li><a href="/">Home</a></li>
                         <li><a href="/">Gestão</a></li>
                         <li><a href="/">Movimentos</a></li>
-                        <li><a href="/">Categorias</a></li>
+                        <li><a href="categorias">Categorias</a></li>
                         <li><a href="sobre">Sobre</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
