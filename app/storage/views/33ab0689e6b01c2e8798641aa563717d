@@ -1,39 +1,52 @@
 <?php $__env->startSection('content'); ?>
-<div class="container">
-    <div class="jumbotron">
+<div class="panel panel-default">
+    <div class="panel-body">
         <div class="row">
-            <div class="col-md-offset-2 col-md-3">
+            <div class="col-md-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Categorias</h3>
                     </div>
                     <div class="panel-body">
-                        <ul>
-                            <?php foreach($categorias as $categoria): ?>
-                                <?php if($categoria->parentId == null): ?>
-                                    <li><a href="/categorias/<?php echo $categoria->id; ?>"><?php echo $categoria->name; ?></a></li>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                        </ul>
+                        <?php foreach($categorias as $categoriaI): ?>
+                            <?php if($categoriaI->parentId === null): ?>
+                                <ul>
+                                    <li><a href="/categorias/<?php echo $categoriaI->id; ?>"><?php echo $categoriaI->name; ?></a></li>
+                                    <ul>
+                                        <?php foreach($categorias as $categoriaII): ?>
+                                            <?php if($categoriaII->parentId === $categoriaI->id): ?>
+                                                <li><a href="/categorias/<?php echo $categoriaII->id; ?>"><?php echo $categoriaII->name; ?></a></li>
+                                                <ul>
+                                                    <?php foreach($categorias as $categoriaIII): ?>
+                                                        <?php if($categoriaIII->parentId === $categoriaII->id): ?>
+                                                            <li><a href="/categorias/<?php echo $categoriaIII->id; ?>"><?php echo $categoriaIII->name; ?></a></li>
+                                                            <ul>
+                                                                <?php foreach($categorias as $categoriaIV): ?>
+                                                                    <?php if($categoriaIV->parentId === $categoriaIII->id): ?>
+                                                                        <li><a href="/categorias/<?php echo $categoriaIV->id; ?>"><?php echo $categoriaIV->name; ?></a></li>
+                                                                        <ul>
+                                                                            <?php foreach($categorias as $categoriaV): ?>
+                                                                                <?php if($categoriaV->parentId === $categoriaIV->id): ?>
+                                                                                    <li><a href="/categorias/<?php echo $categoriaV->id; ?>"><?php echo $categoriaV->name; ?></a></li>
+                                                                                <?php endif; ?>
+                                                                            <?php endforeach; ?>
+                                                                        </ul>
+                                                                    <?php endif; ?>
+                                                                <?php endforeach; ?>
+                                                            </ul>
+                                                        <?php endif; ?>
+                                                    <?php endforeach; ?>
+                                                </ul>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </ul>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
-            <div class="col-md-offset-2 col-md-3">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Categorias</h3>
-                    </div>
-                    <div class="panel-body">
-                        <ul>
-                            <?php foreach($categorias as $categoria): ?>
-                                <?php if($categoria->parentId == null): ?>
-                                    <li><a href="/categorias/<?php echo $categoria->id; ?>"><?php echo $categoria->name; ?></a></li>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <?php echo $__env->yieldContent('detailCategorias'); ?>
         </div>
     </div>
 </div>

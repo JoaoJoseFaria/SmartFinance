@@ -19,12 +19,15 @@ Route::get('/', function()
 
 /*login*/
 
-Route::resource('users', 'UsersController');
+Route::resource('/users', 'UsersController');
 
 /*About*/
-Route::get('sobre', function(){
+Route::get('/sobre', function(){
     return View::make('sobre');
 });
 
 /*Categorias*/
-Route::resource('categorias', 'CategoriasController');
+Route::get('/categorias', 'CategoriasController@create');
+Route::post('/categorias', 'CategoriasController@store');
+Route::get('/categorias/{categoria}', 'CategoriasController@show');
+Route::post('/categorias/{categoria}', 'CategoriasController@update');

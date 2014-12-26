@@ -1,75 +1,80 @@
 <?php
 
+
 class CategoriasController extends BaseController {
 
-	public function index()
+	private function listCat()
 	{
-        $categorias = Categoria::all();
-        return View::make('categorias.index', array('categorias'=>$categorias));
+		$out='';
+		$categorias = Categoria::all();
+		foreach ($categorias as $categoria)
+		{
+			if($categoria->parentId == NULL)
+			{
+				$out .= '<ul>';
+				$out .= '<li><a href="/categorias/' . $categoria->id . '">' . $categoria->name . '</a></li>';
+				$out .= $this->listCatRec($categorias, $categoria->id);
+				$out .= '</ul>';
+			}
+		}
+		return $out;
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
+	private function listCatRec($categorias, $id)
+	{
+		$out = '';
+		foreach ($categorias as $categoria)
+		{
+			$out .= '<ul>';
+			if($categoria->parentId==$id)
+			{
+				$out .= '<li><a href="/categorias/' . $categoria->id . '">' . $categoria->name . '</a></li>';
+				$out .= $this->listCatRec($categorias, $categoria->id);
+			}
+			$out .= '</ul>';
+		}
+		return $out;
+	}
+
 	public function create()
 	{
-        return View::make('categorias.create');
+		$categorias = $this->listCat();
+		$listCategorias = Categoria::lists('name', 'id');
+        return View::make('categorias.create', array('categorias'=>$categorias, 'listCategorias'=>$listCategorias));
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
 	public function store()
 	{
-		//
+		$input = Input::all();
+		Categoria::create($input);
+		return Redirect::to('categorias');
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function show($id)
 	{
-        return View::make('categorias.show');
+		$categorias = $this->listCat();
+		$listCategorias = Categoria::lists('name', 'id');
+		$categoria = Categoria::find($id);
+		return View::make('categorias.show', array('categorias'=>$categorias, 'listCategorias'=>$listCategorias, 'categoria'=>$categoria));
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-        return View::make('categorias.edit');
-	}
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function update($id)
 	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
+		if ( Input::get('action') === 'Gravar' )
+		{
+			$categoria = Categoria::findOrFail(Input::get('id'));
+			$categoria->name = Input::get('name');
+			$categoria->parentId = Input::get('parentId');
+			$categoria->maxValue = Input::get('maxValue');
+			$categoria->save();
+		}
+		if ( Input::get('action') === 'Eliminar' )
+		{
+			$categoria = Categoria::findOrFail(Input::get('id'));
+			$categoria->delete();
+		}
+		return Redirect::to('categorias');
 	}
 
 }
