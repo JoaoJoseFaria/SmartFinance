@@ -1,5 +1,5 @@
 @extends('categorias.index')
-@section('detailCategorias')
+@section('detail')
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-default">

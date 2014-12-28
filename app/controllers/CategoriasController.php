@@ -3,6 +3,11 @@
 
 class CategoriasController extends BaseController {
 
+
+	/*
+	 * Lista as categorias de topo
+	 * return HTML com listagem
+     */
 	private function listCat()
 	{
 		$out='';
@@ -20,6 +25,10 @@ class CategoriasController extends BaseController {
 		return $out;
 	}
 
+	/*
+	 * Lista as categorias intermédias recursivamente
+	 * return HTML com listagem
+	 */
 	private function listCatRec($categorias, $id)
 	{
 		$out = '';
@@ -36,30 +45,61 @@ class CategoriasController extends BaseController {
 		return $out;
 	}
 
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return Response
+	 */
 	public function create()
 	{
 		$categorias = $this->listCat();
 		$listCategorias = Categoria::lists('name', 'id');
+		array_unshift($listCategorias, 'Topo');
         return View::make('categorias.create', array('categorias'=>$categorias, 'listCategorias'=>$listCategorias));
 	}
 
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @return Response
+	 */
 	public function store()
 	{
+		if(Input::get('parentId')==0)
+		{
+			$input = new Categoria();
+			$input->name=Input::get('name');
+			$input->parentId=NULL;
+			$input->maxValue=Input::get('maxValue');
+			$input->save();
+			return Redirect::to('categorias');
+		}
 		$input = Input::all();
 		Categoria::create($input);
 		return Redirect::to('categorias');
 	}
 
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
 	public function show($id)
 	{
 		$categorias = $this->listCat();
 		$listCategorias = Categoria::lists('name', 'id');
-		$categoria = Categoria::find($id);
+		$categoria = Categoria::findOrFail($id);
 		return View::make('categorias.show', array('categorias'=>$categorias, 'listCategorias'=>$listCategorias, 'categoria'=>$categoria));
 	}
 
-
-	public function update($id)
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function update_destroy()
 	{
 		if ( Input::get('action') === 'Gravar' )
 		{

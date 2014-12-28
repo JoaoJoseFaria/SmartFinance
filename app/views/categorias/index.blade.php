@@ -15,7 +15,7 @@
         </div>
     </div>
     <div class="col-md-6">
-        @yield('detailCategorias')
+        @yield('detail')
     </div>
 </div>
 @stop

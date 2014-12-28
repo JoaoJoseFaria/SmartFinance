@@ -30,4 +30,9 @@ Route::get('/sobre', function(){
 Route::get('/categorias', 'CategoriasController@create');
 Route::post('/categorias', 'CategoriasController@store');
 Route::get('/categorias/{categoria}', 'CategoriasController@show');
-Route::post('/categorias/{categoria}', 'CategoriasController@update');
+Route::post('/categorias/{categoria}', 'CategoriasController@update_destroy');
+
+/*Movimentos*/
+Route::get('/movimentos', 'MovimentosController@index');
+Route::get('/movimentos/{movimento}', 'MovimentosController@show');
+Route::post('/movimentos/{movimento}', 'MovimentosController@update_destroy');
