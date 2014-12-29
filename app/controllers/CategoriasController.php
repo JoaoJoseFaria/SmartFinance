@@ -11,7 +11,7 @@ class CategoriasController extends BaseController {
 	private function listCat()
 	{
 		$out='';
-		$categorias = Categoria::all();
+		$categorias = DB::table('categorias')->where('userId', '=', Auth::id())->get();
 		foreach ($categorias as $categoria)
 		{
 			if($categoria->parentId == NULL)
@@ -53,7 +53,7 @@ class CategoriasController extends BaseController {
 	public function create()
 	{
 		$categorias = $this->listCat();
-		$listCategorias = Categoria::lists('name', 'id');
+		$listCategorias = Categoria::where('userId', '=', Auth::id())->get()->lists('name', 'id');
 		array_unshift($listCategorias, 'Topo');
         return View::make('categorias.create', array('categorias'=>$categorias, 'listCategorias'=>$listCategorias));
 	}
@@ -68,6 +68,7 @@ class CategoriasController extends BaseController {
 		if(Input::get('parentId')==0)
 		{
 			$input = new Categoria();
+			$input->userId=Input::get('userId');
 			$input->name=Input::get('name');
 			$input->parentId=NULL;
 			$input->maxValue=Input::get('maxValue');
@@ -88,7 +89,7 @@ class CategoriasController extends BaseController {
 	public function show($id)
 	{
 		$categorias = $this->listCat();
-		$listCategorias = Categoria::lists('name', 'id');
+		$listCategorias = Categoria::where('userId', '=', Auth::id())->get()->lists('name', 'id');
 		$categoria = Categoria::findOrFail($id);
 		return View::make('categorias.show', array('categorias'=>$categorias, 'listCategorias'=>$listCategorias, 'categoria'=>$categoria));
 	}

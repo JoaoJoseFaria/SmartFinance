@@ -8,6 +8,7 @@
                 </div>
                 <div class="panel-body">
                     {{Form::open(['url'=>'/categorias','class'=>'form'])}}
+                    {{Form::hidden('userId',Auth::id())}}
                     <div class="row">
                         <div class="col-md-4">{{Form::label('name','Nome:')}}</div>
                         <div class="col-md-8">{{ Form::text('name', '', ['class' => 'form-control']) }}</div>

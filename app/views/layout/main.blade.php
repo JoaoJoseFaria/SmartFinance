@@ -17,6 +17,17 @@
                     <li><a href="/movimentos">Movimentos</a></li>
                     <li><a href="/categorias">Categorias</a></li>
                     <li><a href="/sobre">Sobre</a></li>
+                    @if(Auth::check())
+                        <li><a href="/login">Logout</a></li>
+                        <div class="panel panel-default">
+                            </p>
+                            <p>Benvindo</p>
+                            <p>{{Auth::user()->name}}</p>
+                            </p>
+                        </div>
+                    @else
+                        <li><a href="/login">Login</a></li>
+                    @endif
                 </ul>
             </div>
             <div id="page-content-wrapper">

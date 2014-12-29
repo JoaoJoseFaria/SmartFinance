@@ -9,7 +9,7 @@ class MovimentosController extends BaseController {
 	 */
 	public function index()
 	{
-		$movimentos = Movimento::with('categorias')->get();
+		$movimentos = Movimento::where('idUser', '=', Auth::id())->with('categorias')->get();
 		return View::make('movimentos.index', array('movimentos' => $movimentos));
 	}
 
@@ -21,9 +21,9 @@ class MovimentosController extends BaseController {
 	 */
 	public function show($id)
 	{
-		$movimentos = Movimento::with('categorias')->get();
+		$movimentos = Movimento::where('idUser', '=', Auth::id())->with('categorias')->get();
 		$movimento = Movimento::findOrFail($id);
-		$listCategorias = Categoria::lists('name', 'id');
+		$listCategorias = Categoria::where('userId', '=', Auth::id())->get()->lists('name', 'id');
 		return View::make('movimentos.edit', array('movimentos' => $movimentos, 'movimento' => $movimento, 'listCategorias' => $listCategorias));
 	}
 

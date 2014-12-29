@@ -14,6 +14,7 @@ class CreateCategoriasTable extends Migration {
 	{
 		Schema::create('categorias', function(Blueprint $table) {
 			$table->increments('id');
+			$table->integer('userId')->nullable()->unsigned();
 			$table->integer('parentId')->nullable()->unsigned();
 			$table->string('name');
 			$table->decimal('maxValue');

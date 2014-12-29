@@ -17,22 +17,31 @@ Route::get('/', function()
 	return View::make('home');
 });
 
-/*login*/
-
-Route::resource('/users', 'UsersController');
-
 /*About*/
 Route::get('/sobre', function(){
     return View::make('sobre');
 });
 
 /*Categorias*/
-Route::get('/categorias', 'CategoriasController@create');
-Route::post('/categorias', 'CategoriasController@store');
-Route::get('/categorias/{categoria}', 'CategoriasController@show');
-Route::post('/categorias/{categoria}', 'CategoriasController@update_destroy');
+Route::group(array('before' => 'auth'), function() {
+    Route::get('/categorias', 'CategoriasController@create');
+    Route::post('/categorias', 'CategoriasController@store');
+    Route::get('/categorias/{categoria}', 'CategoriasController@show');
+    Route::post('/categorias/{categoria}', 'CategoriasController@update_destroy');
+});
 
 /*Movimentos*/
-Route::get('/movimentos', 'MovimentosController@index');
-Route::get('/movimentos/{movimento}', 'MovimentosController@show');
-Route::post('/movimentos/{movimento}', 'MovimentosController@update_destroy');
+Route::group(array('before' => 'auth'), function() {
+    Route::get('/movimentos', 'MovimentosController@index');
+    Route::get('/movimentos/{movimento}', 'MovimentosController@show');
+    Route::post('/movimentos/{movimento}', 'MovimentosController@update_destroy');
+});
+
+/*login*/
+Route::get('/login', 'LoginController@login');
+Route::post('/login', 'LoginController@dologin');
+
+/*Event::listen('illuminate.query', function($query)
+{
+    var_dump($query);
+});*/
