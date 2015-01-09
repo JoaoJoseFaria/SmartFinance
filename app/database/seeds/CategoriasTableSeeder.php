@@ -68,6 +68,60 @@ class CategoriasTableSeeder extends Seeder {
         );
 
         DB::table('categorias')->insert($categorias);
+
+        $categorias = array(
+            'userId' => 1,
+            'parentId' => null,
+            'name' => 'Saude',
+            'maxValue' => 500
+        );
+
+        DB::table('categorias')->insert($categorias);
+
+        $categorias = array(
+            'userId' => 1,
+            'parentId' => null,
+            'name' => 'Educação',
+            'maxValue' => 400
+        );
+
+        DB::table('categorias')->insert($categorias);
+
+        $categorias = array(
+            'userId' => 1,
+            'parentId' => null,
+            'name' => 'Lazer',
+            'maxValue' => 1500
+        );
+
+        DB::table('categorias')->insert($categorias);
+
+        $categorias = array(
+            'userId' => 1,
+            'parentId' => null,
+            'name' => 'Saude',
+            'maxValue' => 500
+        );
+
+        DB::table('categorias')->insert($categorias);
+
+        $categorias = array(
+            'userId' => 2,
+            'parentId' => null,
+            'name' => 'Educação',
+            'maxValue' => 400
+        );
+
+        DB::table('categorias')->insert($categorias);
+
+        $categorias = array(
+            'userId' => 2,
+            'parentId' => null,
+            'name' => 'Lazer',
+            'maxValue' => 1500
+        );
+
+        DB::table('categorias')->insert($categorias);
 	}
 
 }

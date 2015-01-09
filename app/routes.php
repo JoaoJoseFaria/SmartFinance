@@ -41,7 +41,12 @@ Route::group(array('before' => 'auth'), function() {
 Route::get('/login', 'LoginController@login');
 Route::post('/login', 'LoginController@dologin');
 
-/*Event::listen('illuminate.query', function($query)
-{
-    var_dump($query);
-});*/
+/*gestao*/
+Route::group(array('before' => 'auth'), function() {
+    Route::get('gestao', 'GestaoController@index');
+});
+
+//Event::listen('illuminate.query', function($query)
+//{
+//    var_dump($query);
+//});

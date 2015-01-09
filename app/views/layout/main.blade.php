@@ -13,7 +13,7 @@
                 <ul class="sidebar-nav">
                     <li class="sidebar-brand"><a href="/">SmartFinance</a></li>
                     <li><a href="/">Home</a></li>
-                    <li><a href="/">Gestão</a></li>
+                    <li><a href="/gestao">Gestão</a></li>
                     <li><a href="/movimentos">Movimentos</a></li>
                     <li><a href="/categorias">Categorias</a></li>
                     <li><a href="/sobre">Sobre</a></li>
@@ -55,5 +55,6 @@
             $("#wrapper").toggleClass("toggled");
         });
         </script>
+        @yield('script')
     </body>
 </html>
